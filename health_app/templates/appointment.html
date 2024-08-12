@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home || Dr</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/appointment.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+
+<body id="body">
+    <img id="imgx"  />
+    <div id="contain">
+        <div id="image">
+            <div class="nav">
+                <h1 id="h1">{{pt.first_name}}{{' '}}{{pt.last_name}}</h1>
+                {%if request.session.email == pt.email%}
+                <form action="/pt/{{pt.id}}">
+                    <button type="submit" id="btn" class="btn btn-success">Go Back</button>
+                </form>
+                {%else%}
+                <form action="/{{pt.first_name}}/{{pt.id}}">
+                    <button type="submit" id="btn" class="btn btn-success">Go Back</button>
+                </form>
+                {%endif%}
+            </div>
+            <div class="main">
+                <h3 class="text">Make An Appointment</h3>
+                {% if request.session.specialty == 0 %}
+                <form id='specialty_form' action="/specialty" method="post">
+                    {%csrf_token%}
+                    <input type="hidden" id="pt_id" name="patient" value="{{request.session.id}}">
+                    <select class="form-select" onchange="submit()" id="specialty" name="specialty">
+                        <option selected>Choose Specialty</option>
+                        {%for dr in drs%}
+                        <option id="specialty_option">{{dr.specialty}}</option>
+                        {%endfor%}
+                    </select>
+                </form>
+                {% elif request.session.specialty != 0 and request.session.location == 0 %}
+                <form id='specialty_form' action="/specialty" method="post">
+                    {%csrf_token%}
+                    <select class="form-select" onchange="submit()" id="specialty" name="specialty">
+                        <option selected>{{request.session.specialty}}</option>
+                        {%for dr in drs%}
+                        <option id="specialty_option">{{dr.specialty}}</option>
+                        {%endfor%}
+                    </select>
+                </form>
+                <form id="location_form" action="/location" method="post">
+                    {%csrf_token%}
+                    <select class="form-select" id="location" name="location" onchange='submit()'
+                        aria-label="Default select example">
+                        <option selected>Select Location</option>
+                        {%for dr in specialty%}
+                        <option id="location_option">{{dr.location}}</option>
+                        {%endfor%}
+                    </select>
+                </form>
+                {% elif request.session.specialty != 0 and request.session.location != 0 %}
+                <form id='specialty_form' action="/specialty" method="post">
+                    {%csrf_token%}
+                    <select class="form-select" onchange="submit()" id="specialty" name="specialty">
+                        <option selected>{{request.session.specialty}}</option>
+                        {%for dr in drs%}
+                        <option id="specialty_option">{{dr.specialty}}</option>
+                        {%endfor%}
+                    </select>
+                </form>
+                <form id="location_form" action="/location" method="post">
+                    {%csrf_token%}
+                    <select class="form-select" id="location" name="location" onchange='submit()'
+                        aria-label="Default select example">
+                        <option selected>{{request.session.location}}</option>
+                        {%for dr in specialty%}
+                        <option id="location_option">{{dr.location}}</option>
+                        {%endfor%}
+                    </select>
+                </form>
+                {%if request.session.doctor_id == None%}
+                {%for dr in the_dr%}
+                <form action="/{{dr.id}}/doctor" method="post">
+                    {%csrf_token%}
+                    <select class="form-select" id="dr" name="dr" onchange="submit()"
+                        aria-label="Default select example">
+                        <option selected>Choose Your Doctor</option>
+                        <option id="dr_option">{{dr.first_name}}{{' '}}{{dr.last_name}}</option>
+                    </select>
+                </form>
+                {%endfor%}
+                {%else%}
+                {%for dr in the_dr%}
+                <form action="/{{dr.id}}/doctor" method="post">
+                    {%csrf_token%}
+                    <select class="form-select" id="dr" name="dr" onchange="submit()"
+                        aria-label="Default select example">
+                        <option selected>{{dr.first_name}}{{' '}}{{dr.last_name}}</option>
+                        <option id="dr_option">{{dr.first_name}}{{' '}}{{dr.last_name}}</option>
+                    </select>
+                </form>
+                {%endfor%}
+                {%endif%}
+                <form id="appointment_form" action="/pt/dr/{{request.session.id}}" method="post">
+                    {%csrf_token%}
+                    <input type="hidden" id="pt_id" name="patient" value="{{request.session.id}}">
+                    <div class="input-group" id="thedate">
+                        <input type="date" name="date" id="date" min="" class="form-control"
+                            placeholder="Recipient's username" aria-label="Recipient's username with two button addons">
+                        <script>
+                            var today = new Date().toISOString().split('T')[0]
+                            document.getElementById('date').setAttribute('min', today)
+                        </script>
+                    </div>
+                    {%endif%}
+                    <button type="submit" id="appointment_btn" class="btn btn-danger">Make An Appointment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{% static 'js/appointment.js' %}"></script>
+</body>
+
+
+</html>

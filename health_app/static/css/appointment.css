@@ -1,0 +1,92 @@
+body,
+html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#c {
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 100%;
+    height: 70%;
+    padding: 30px;
+    text-align: center;
+
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.main {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+.text{
+    text-align: center;
+}
+
+#appointment_btn{
+    margin-left: 370px;
+    margin-top: 40px;
+    opacity: 0.70!important;
+    color: white;
+    background-color: rgb(174, 132, 213);
+    border-color: purple;   
+}
+.form-select{
+    margin: 30px 0px 30px 0px;
+}
+#imgx {
+    background-position: 100%;
+    filter: blur(8px);
+    -webkit-filter: blur(0px);
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#btn{
+    opacity: 0.98!important;
+    background: transparent!important;
+    border-color: purple;
+}
+#specialty , #location , #dr , #thedate{
+    width: 180px;
+    margin: 0 auto;
+    margin-top: 40px;
+    opacity: 0.95;
+    padding: 5px;
+    color:white;
+    text-align: center;
+    background: transparent;
+}
+.text{
+    color: white;
+}
+#h1{
+    color: white;
+}
+#specialty_option , #location_option , #dr_option{
+    color: black;
+}
+
+#contain{
+    position: relative;
+    top: -650px;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home || Dr</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/new_visit.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+</head>
+
+<body>
+    <img id="imgx" />
+    <div id="image"></div>
+    <div id="c" class="container">
+        <div class="nav">
+            <h1>Patient {{pt.first_name}}</h1>
+            <form action='/{{pt.first_name}}/{{pt.id}}'>
+                <button type="submit" id="btn1" class="btn btn-success">Go Back</button>
+            </form>
+        </div>
+        <h3 class="text">Dr. {{dr.first_name}}{{' '}}{{dr.last_name}}</h3>
+        <form id="pt_info_form" action="/{{pt.id}}/new_visit" method="post">
+            {%csrf_token%}
+            <div class="main">
+                <div>
+                    <div id="cause_of_visit">
+                        <div>
+                            <h5 class="text">Cause Of The Visit : </h5>
+                            <div class="input-group">
+                                <textarea id="form1" class="form-control" name="cause"
+                                    aria-label="With textarea"></textarea>
+                            </div>
+                        </div>
+                        <span id="cause_error"></span>
+                    </div>
+                    <div id="the_management">
+                        <div>
+                            <h5 class="text">Management : </h5>
+                            <div class="input-group">
+                                <textarea id="form2" class="form-control" name="management"
+                                    aria-label="With textarea"></textarea>
+                            </div>
+                        </div>
+                        <span id="management_error"></span>
+                    </div>
+                </div>
+                <div>
+                    <h5 id="vit" class="text">Vitals</h5>
+                    <div id="vitals">
+                        <div>
+                            <div class="username">HR</div>
+                            <div id="hr" class="input-group">
+                                <input type="number" name="hr" id="a" class="form-control">
+                            </div>
+                            <span id="a_error"></span>
+                            <div class="username">Temp</div>
+                            <div class="input-group" id="temp">
+                                <input type="number" name="temp" id="b" class="form-control">
+                            </div>
+                            <span id="b_error"></span>
+                            <div class="username">Spo2</div>
+                            <div class="input-group" id="spo2">
+                                <input type="number" name="spo2" id="f" class="form-control">
+                            </div>
+                            <span id="f_error"></span>
+                        </div>
+                        <div>
+
+                            <div class="username">BP</div>
+                            <div id="sbp">
+                                <h6>SBP</h6>
+                                <div class="input-group">
+                                    <input type="number" name="sbp" id="d" class="form-control">
+                                </div>
+                                
+                            </div>
+                            <span id="d_error"></span>
+                            <div id="dbp">
+                                <h6>DBP</h6>
+                                <div class="input-group">
+                                    <input type="number" name="dbp" id="e" class="form-control">
+                                </div>
+                            </div>
+                            <span id="e_error"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" id="btn2" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{% static 'js/new_visit.js' %}"></script>
+</body>
+
+</html>

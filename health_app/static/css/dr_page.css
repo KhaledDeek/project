@@ -1,0 +1,101 @@
+body,
+html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#c {
+    /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 100%;
+    height: 90%;
+    padding: 30px;
+    text-align: center;
+}
+
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#btn {
+    margin-top: 10px;
+    background-color: #9c6fe4;
+}
+
+#btn2 {
+    background-color: #9c6fe4;
+}
+
+.activities,
+.visits {
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+#imgx {
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#over1,
+#over2 {
+    width: 600px;
+    height: 190px;
+    overflow-y: scroll;
+    scrollbar-color: rgb(70, 69, 69) transparent
+}
+
+#table1,
+#table2 {
+    opacity: 0.7 !important;
+    background: transparent !important;
+}
+
+#btn2,
+#btn3 {
+    opacity: 0.90 !important;
+    background: transparent !important;
+    border-color: purple;
+}
+#id{
+    margin-bottom: 10px;
+    border-color: purple;
+}
+#patient_id {
+    color: white;
+    border-color: purple;
+    background: transparent !important;
+}
+#national_id{
+    color: white;
+    border-color: purple;
+    background: transparent;
+}
+.messages {
+    color: yellow;
+    text-align: left;
+
+}

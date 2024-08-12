@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home || Dr</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dr_page.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <img id="imgx"  />
+    <div id="image"></div>
+    <div id="c" class="container">
+        <div class="nav">
+            <h1>Welcome Dr. {{dr.first_name}}</h1>
+            <form action="/logout">
+                <button type="submit" id="btn2" class="btn btn-success">Sign Out</button>
+            </form>
+        </div>
+        <div class="main">
+            <div>
+                <div class="activities">
+                    <h5>Upcoming Appointments</h5>
+                    <div id="over1">
+                        <table id="table2" class="table table-dark table-hover">
+                            <tr>
+                                <td>Patient Name</td>
+                                <td>Time</td>
+                                <td>Action</td>
+                            </tr>
+                            {%for x in dr.appoint.all|dictsortreversed:"date"%}
+                            <tr>
+                                <td>{{' '}}{{x.patient.first_name}}{{' '}}{{x.patient.last_name}}</td>
+                                <td>{{x.date}}</td>
+                                <td><a href="/{{x.id}}/visit/delete">Cancel</a>/<a
+                                        href="/{{x.patient.id}}/visit">Submit</a></td>
+                            </tr>
+                            {%endfor%}
+                        </table>
+                    </div>
+                </div>
+                <div class="visits">
+                    <h5>Recent Visits</h5>
+                    <div id="over2">
+                        <table id="table1" class="table table-dark table-hover">
+                            <tr>
+                                <td>Patient Name</td>
+                                <td>Time</td>
+                                <td>Action</td>
+                            </tr>
+                            {%for visit in dr.visit.all|dictsortreversed:"date"%}
+                            <tr>
+                                <td>{{visit.patient.first_name}}{{' '}}{{visit.patient.last_name}}</td>
+                                <td>{{visit.date}}</td>
+                                <td><a href="/{{visit.id}}/visit_info">Visit Info</a></td>
+                            </tr>
+                            {%endfor%}
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div>
+                {%if messages%}
+                <ul class="messages">
+                    {%for message in messages %}
+                    {% if 'error' in message.tags %}
+                    <li>{{message}}</li>
+                    {% endif %}
+                    {%endfor%}
+                </ul>
+                {%endif%}
+                <form id="form" action="/ptinfo" method="post">
+                    {%csrf_token%}
+                    <div id="id" class="input-group">
+                        <span id="patient_id" class="input-group-text">Patient National Id</span>
+                        <input type="text" name="national_id" id="national_id" aria-label="id" class="form-control">
+                    </div>
+                    <button type="submit" id="btn3" class="btn btn-primary">View Patient Info</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{% static 'js/dr.js' %}"></script>
+</body>
+
+</html>
